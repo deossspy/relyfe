@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAKAVAJRUS</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+
+
+
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: rgb(20, 20, 20);
+        color: lime;
+      }
+
+        .icon {
+        width: 7vh;
+        height: 7vh;
+        transition-duration: 0.256s;
+        cursor: pointer;
+        margin-bottom: 2vh;
+            }
+
+        .icon:hover {
+        transform: scale(1.2); /* Increase the size by 10% on hover */
+        }
+
+        .button{
+            border-radius: 8px;
+            width: 14vh;
+            height: 4vh;
+            background-color: rgb(14, 14, 14);
+            color: lime;
+            border: 0;
+            font-size: 1.3vh;
+            transition-duration: 0.25s;
+            cursor: pointer;
+            margin-left: 1vh;
+            
+        }
+
+        .button:hover{
+            color: rgb(0, 173, 0);
+            background-color: rgb(10, 10, 10);
+        }
+
+        .top {
+            background-color: #000000;
+            width: 100%;
+            height: 6.5vh;
+            position: fixed;
+            top: 0vh;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            z-index: 999; /* Ensure the top bar is above other elements */
+            transition: top 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .top.active {
+            top: 0;
+        }
+
+
+
+
+        #popup-container {
+  position: fixed;
+  left: -300px; /* Initial position off-screen */
+  top: 0;
+  height: 100%;
+  width: 30vh;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: left 0.3s ease-out;
+}
+
+#popup-content {
+  padding: 20px;
+}
+
+#arrow-container {
+  position: relative;
+}
+
+#right-popup-container {
+  position: fixed;
+  right: -300px; /* Initial position off-screen */
+  top: 0;
+  height: 100%;
+  width: 30vh;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-out;
+}
+
+#arrow-indicator {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-left: -20px; /* Half of arrow width */
+  margin-top: -10px; /* Half of arrow height */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 20px;
+  border-color: transparent transparent transparent #f0f0f0;
+}
+
+
+button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.cC{
+    height: 12vh;
+    width: 31vh;
+    border-radius: 9px;
+    background-color: #0c0c0c;
+}
+
+
+.images{
+            border-radius: 6px;
+            width: 128px;
+            height: 128px;
+            margin-top: 30px;
+            transition-duration: 0.25s;
+        }
+
+        .secretimage2093{
+            cursor: pointer;
+            transition-duration: 0.25s;
+        }
+
+        .secretimage2093:hover{
+            transform: scale(1.2); /* Increase the size by 10% on hover */
+        }
+
+
+        #blurred-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(0, 0, 0);
+      transition-duration: 0.25s;
+      z-index: 999; /* Ensure it's on top of other elements */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+    }
+
+    #verify-button {
+    width: 40vh;
+        height: 5vh;
+      font-size: 17px;
+      background-color: #000000; /* Google's blue color for example */
+      color: lime;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+      transition-duration: 0.25s;
+    }
+
+    #verify-button:hover{
+        background-color: #101010; /* Google's blue color for example */
+    }
+
+    #loading-message {
+      color: #ffffff;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    #loading-gif{
+        margin-top: 5vh;
+        width: 4vh;
+        height: 4vh;
+
+    }
+    #success.gif{
+        width: 5vh;
+    }
+
+    .popupequip {
+    position: fixed;
+    top: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    height: 10%;
+    background-color: #4285f4;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: top 0.5s ease;
+}
+
+#video-container {
+      display: none;
+      width: 1920px;
+      height: 1080px;
+    }
+
+    #video1, #video2 {
+      width: 100%;
+      height: 100%;
+    }
+    </style>
+
+
+
+</head>
+<body>
+    
+    
+    
+    <div id="blurred-overlay">
+        <center>
+          <button id="verify-button" onclick="verifyAndRemoveOverlay()">video before entering</button>
+          <p style="font-size: 10px;">[you can only watch this video once]</p>
+          <img id="loading-gif" src="loading-spinner.gif" alt="Loading" style="display: none;">
+          <div id="video-container">
+            <video id="video1" src="video1.mp4" type="video/mp4" onended="playNextVideo()"></video>
+            <video id="video2" src="video2.mp4" type="video/mp4"></video>
+          </div>
+        </center>
+      </div>
+    
+      <script>
+        const blurredOverlay = document.getElementById('blurred-overlay');
+        const loadingGif = document.getElementById('loading-gif');
+        const videoContainer = document.getElementById('video-container');
+        const video1 = document.getElementById('video1');
+        const video2 = document.getElementById('video2');
+    
+        function showOverlay() {
+          blurredOverlay.style.display = 'flex';
+          loadingGif.style.display = 'none';
+        }
+    
+        function showLoading() {
+          loadingGif.style.display = 'block';
+        }
+    
+        function hideOverlay() {
+          blurredOverlay.style.display = 'none';
+          loadingGif.style.transitionDuration = '0.25s';
+          loadingGif.style.display = 'none';
+          // Remove the blurred overlay
+          blurredOverlay.parentNode.removeChild(blurredOverlay);
+        }
+    
+        function playNextVideo() {
+          video1.style.display = 'none';
+          video2.style.display = 'block';
+          video2.play();
+          // Save in localStorage that the videos have been watched
+          localStorage.setItem('videosWatched', 'true');
+        }
+    
+        function verifyAndRemoveOverlay() {
+          showLoading();
+    
+          setTimeout(function () {
+            showOverlay();
+            videoContainer.style.display = 'block';
+            video1.play();
+    
+            // Request fullscreen
+            if (videoContainer.requestFullscreen) {
+              videoContainer.requestFullscreen();
+            } else if (videoContainer.mozRequestFullScreen) {
+              videoContainer.mozRequestFullScreen();
+            } else if (videoContainer.webkitRequestFullscreen) {
+              videoContainer.webkitRequestFullscreen();
+            } else if (videoContainer.msRequestFullscreen) {
+              videoContainer.msRequestFullscreen();
+            }
+          }, 2000); // Adjust the timeout as needed
+        }
+    
+        // Check if the videos have been watched before displaying the overlay
+        const videosWatched = localStorage.getItem('videosWatched');
+        if (videosWatched) {
+          hideOverlay();
+        }
+    
+      </script>
+    
+    <center> <p style="font-size: 20px;">sakavajrus</p></center>
+    <center><div style="height: 1px; width: 95%; background: white;"></div></center>
+
+    
+    <center><img src="icon.png" class="images"></center>
+    <center><p id="cookieCounter">0</p></center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="popup-container" style="background-color: #0c0c0c;">
+        <div id="popup-content">
+        <center> <p style="color: lime; margin-bottom: 10px;">sakavajrus</p> <img src="icon.png" class="icon" id="sidebar-icon"></center>
+        
+          <center>
+          <button class="button">home</button>
+          <button class="button">special characters</button>
+          <button class="button">code</button>
+          <button class="button" onclick="changeColorTheme()">text-color changer</button>
+        </center>
+        </div>
+      </div>
+
+
+
+      <div id="arrow-container" >
+        <div id="right-popup-container" style="background-color: #0c0c0c;">
+          <div id="popup-content">
+            <center>
+
+                <center><img src="icon.png" class="secretimage2093"id="hover-image" class="images"></center>
+                <center><h1 style="font-size: 20px;">2093</h1></center>
+                <audio id="hover-sound">
+                    <source src="hover-sound-effect.mp3" type="audio/mp3">
+                  </audio>
+                  <script>
+                    const hoverImage = document.getElementById('hover-image');
+                    const hoverSound = document.getElementById('hover-sound');
+                
+                    hoverImage.addEventListener('mouseover', function () {
+                      hoverSound.play();
+                    });
+                  </script>
+            
+        </center>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const popupContainer = document.getElementById('popup-container');
+
+  let hoverTimer;
+
+  document.addEventListener('mousemove', function (event) {
+    if (event.clientX < 250) {
+      // If the mouse is on the left side of the screen
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(function () {
+        // Display the popup after 2 seconds
+        popupContainer.style.left = '0';
+      }, 250);
+    } else {
+      // If the mouse moves away from the left side, hide the popup
+      clearTimeout(hoverTimer);
+      popupContainer.style.left = '-290px';
+    }
+  });
+
+  // Close the popup if the mouse leaves the popup
+  popupContainer.addEventListener('mouseout', function (event) {
+    if (!event.relatedTarget || !event.relatedTarget.closest('#popup-container')) {
+      clearTimeout(hoverTimer);
+      popupContainer.style.left = '-290px';
+    }
+  });
+});
+
+
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function changeColorTheme() {
+  const buttons = document.querySelectorAll('#popup-content button');
+  const randomColor = getRandomColor();
+
+  buttons.forEach(function (button) {
+    button.style.color = randomColor;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const rightPopupContainer = document.getElementById('right-popup-container');
+  const arrowIndicator = document.getElementById('arrow-indicator');
+
+  let hoverTimer;
+
+  document.addEventListener('mousemove', function (event) {
+    if (event.clientX > window.innerWidth - 250) {
+      // If the mouse is on the right side of the screen
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(function () {
+        // Display the popup after 2 seconds
+        rightPopupContainer.style.right = '0';
+        arrowIndicator.style.right = '100%';
+      }, 250);
+    } else {
+      // If the mouse moves away from the right side, hide the popup
+      clearTimeout(hoverTimer);
+      rightPopupContainer.style.right = '-290px';
+      arrowIndicator.style.right = '-20px'; // Adjust this value accordingly
+    }
+  });
+
+  // Close the popup if the mouse leaves the popup
+  rightPopupContainer.addEventListener('mouseout', function (event) {
+    if (!event.relatedTarget || !event.relatedTarget.closest('#right-popup-container')) {
+      clearTimeout(hoverTimer);
+      rightPopupContainer.style.right = '-290px';
+      arrowIndicator.style.right = '-20px'; // Adjust this value accordingly
+    }
+  });
+});
+
+
+
+
+      </script>
+
+</body>
+</html>
