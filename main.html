@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAKAVAJRUS</title>
+    <title>RELYFE</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 
@@ -12,6 +12,29 @@
 
 
     <style>
+
+/* Add styles for the button */
+.glow-button {
+            background-color: #1f1f1f; /* Black background color */
+            color: lime; /* Lime text color */
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: box-shadow 0.5s; /* Add a smooth transition for box-shadow */
+        }
+
+        /* Apply the glow effect on hover */
+        .glow-button:hover {
+            box-shadow: 0 0 20px 10px #4CAF50; /* Add glow effect on hover */
+        }
+
+        /* Add transition for the glow effect */
+        .glow-button:active {
+            box-shadow: 0 0 5px 1px #4CAF50; /* Reduce glow effect when button is active (pressed) */
+            transition: box-shadow 0.5s; /* Add a smooth transition for box-shadow */
+        }
       body {
         font-family: 'Poppins', sans-serif;
         background-color: rgb(20, 20, 20);
@@ -131,13 +154,15 @@ button {
 
 .images{
             border-radius: 6px;
-            width: 128px;
-            height: 128px;
+            width: 8vh;
+            height: 8vh;
             margin-top: 30px;
             transition-duration: 0.25s;
         }
 
         .secretimage2093{
+          width: 8vh;
+            height: 8vh;
             cursor: pointer;
             transition-duration: 0.25s;
         }
@@ -219,12 +244,73 @@ button {
       width: 100%;
       height: 100%;
     }
+
+
+    progress {
+            width: 20vh;
+            height: 3vh;
+            appearance: none;
+            background-color: #ddd;
+            border: none;
+            border-radius: 1vh;
+            overflow: hidden;
+        }
+
+        progress::-webkit-progress-bar {
+            background-color: #ddd;
+            border-radius: 1vh;
+        }
+
+        progress::-webkit-progress-value {
+    background-color: lime;
+    border-radius: 1vh;
+    float: left ;
+    transition: width 0.3s ease, left 0.3s ease; /* Add a smooth transition effect to the width and left */
+}
+
+progress::-moz-progress-bar {
+    background-color: lime;
+    border-radius: 1vh;
+    transition: width 0.3s ease, left 0.3s ease; /* Add a smooth transition effect to the width and left */
+}
+
+
+
+    #caption-container {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: lime;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            transition: opacity 0.5s ease; /* Smooth transition for opacity */
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 
 
 
 </head>
 <body>
+
+  
     
     
     
@@ -301,17 +387,11 @@ button {
     
       </script>
     
-    <center> <p style="font-size: 20px;">sakavajrus</p></center>
+    <center> <p style="font-size: 20px;">RELYFE</p></center>
     <center><div style="height: 1px; width: 95%; background: white;"></div></center>
 
-    
-    <center><img src="icon.png" class="images"></center>
-    <center><p id="cookieCounter">0</p></center>
-
-
-
-
-
+    <center><p style="margin-top: 1vh;">tour</p></center>
+    <center ><button class="glow-button" id="start-tour" onclick="startTour()">tour guide</button></center>
 
 
 
@@ -325,13 +405,13 @@ button {
 
     <div id="popup-container" style="background-color: #0c0c0c;">
         <div id="popup-content">
-        <center> <p style="color: lime; margin-bottom: 10px;">sakavajrus</p> <img src="icon.png" class="icon" id="sidebar-icon"></center>
+        <center> <p style="color: lime; margin-bottom: 10px;">RELYFE</p> <img src="icon.png" class="icon" id="sidebar-icon"></center>
+        
         
           <center>
           <button class="button">home</button>
-          <button class="button">special characters</button>
-          <button class="button">code</button>
-          <button class="button" onclick="changeColorTheme()">text-color changer</button>
+          <button class="button">world map</button>
+          <button class="button">???</button>
         </center>
         </div>
       </div>
@@ -343,19 +423,31 @@ button {
           <div id="popup-content">
             <center>
 
-                <center><img src="icon.png" class="secretimage2093"id="hover-image" class="images"></center>
-                <center><h1 style="font-size: 20px;">2093</h1></center>
-                <audio id="hover-sound">
-                    <source src="hover-sound-effect.mp3" type="audio/mp3">
-                  </audio>
-                  <script>
-                    const hoverImage = document.getElementById('hover-image');
-                    const hoverSound = document.getElementById('hover-sound');
-                
-                    hoverImage.addEventListener('mouseover', function () {
-                      hoverSound.play();
-                    });
-                  </script>
+              <center><p style="margin-top: 5vh;">stats</p></center>
+              <center><progress id="autoProgress" value="0" max="100"></progress>
+          
+                <script>
+                    // Function to update the progress automatically
+                    function updateProgressAutomatically() {
+                        const progressElement = document.getElementById('autoProgress');
+                        let value = 0;
+            
+                        const intervalId = setInterval(function () {
+                            // Increment the value
+                            value += 5;
+                            // Update the progress value
+                            progressElement.value = value;
+            
+                            // Check if the progress reaches 100
+                            if (value >= 100) {
+                                clearInterval(intervalId); // Stop the interval when progress is complete
+                            }
+                        }, 500); // Adjust the interval duration (milliseconds) as needed
+                    }
+            
+                    // Call the function to start automatic progress
+                    updateProgressAutomatically();
+                </script></center>
             
         </center>
           </div>
@@ -365,6 +457,70 @@ button {
 
 
 
+      <div id="caption-container"></div>
+
+      <script>
+        let currentStep = 0;
+        const steps = [
+            { id: 'step1', caption: '53110 u53r', audio: 'step1robot.mp3' },
+            { id: 'step2', caption: 'w31c0m3 t0 th3 tw1zzp14n3t', audio: 'step2audio.mp3' },
+            { id: 'step3', caption: 'y0ur 0bj3ct1v3 15 t0 8u1l0 4 uf0 t0 f1y 84ck t0 34rth', audio: 'step3audio.mp3' },
+            { id: 'step4', caption: '1f y0u m0v3 y0ur m0u53 t0 th3 13ft 0f th3 5cr33n y0u w111 83 4813 t0 4cc355 4 51d384r wh1ch w111 c0nt41n 3v3ryth1ng y0u11 n33d', audio: 'step4audio.mp3' },
+            { id: 'step5', caption: '4nd 1f y0u m0v3 y0ur m0u53 t0 th3 r1ght 0f th3 5cr33n y0u w111 83 4813 t0 4cc355 d41ly r3w4rd5 wh1ch 4r3 r4nd0m f0r 3v3ry0n3', audio: 'step5audio.mp3' },
+            { id: 'step6', caption: 'y0u h4v3 4 w33k t0 8u11d th3 UF0, 3153 y0u W1LL 83 84nn3d fr0m 3nt3r1ng 4ny w3b51t3 m4de 8y d30', audio: 'step6audio.mp3' },
+            { id: 'step7', caption: 'g00d1uck! h4ppy 8u1ld1ng.', audio: 'step7audio.mp3' }
+            // Add more steps as needed
+        ];
+    
+        function startTour() {
+            showStep(currentStep);
+        }
+    
+        function nextStep() {
+            hideStep(currentStep);
+            currentStep++;
+    
+            // Check if there is a next step, if not, stop the tour
+            if (currentStep < steps.length) {
+                showStep(currentStep);
+            } else {
+                stopTour();
+            }
+        }
+    
+        function showStep(stepIndex) {
+            const captionContainer = document.getElementById('caption-container');
+            const audio = new Audio();  // create a new Audio object
+    
+            captionContainer.textContent = steps[stepIndex].caption;
+            captionContainer.style.display = 'block';
+            captionContainer.style.opacity = 1; // Show the container smoothly
+    
+            audio.src = steps[stepIndex].audio;
+            audio.play();
+    
+            audio.addEventListener('ended', function() {
+                // Hide the container smoothly after the audio has finished playing
+                captionContainer.style.opacity = 0;
+    
+                // Delay the next step to allow time for the container to fade out
+                setTimeout(function() {
+                    nextStep();
+                }, 500);
+            });
+        }
+    
+        function hideStep(stepIndex) {
+            // Implement if needed
+        }
+    
+        function stopTour() {
+            // Add any additional logic to perform when the tour stops
+            console.log('Tour stopped.');
+        }
+    </script>
+    
+    
 
 
 
